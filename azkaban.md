@@ -17,15 +17,15 @@
 
 ### 报错一
 
-<img src="images/error01.png" alt="error01" style="zoom:70%;" />
+<img src="assets/error01.png" alt="error01" style="zoom:70%;" />
 
 * 运行Azkaban任务报错:  `java.lang.IllegalStateException: Process has not yet started`
   * 报错原因: 部署Azkaban时部署为多执行器模式，那么在这种模式下Azkaban web Server会根据策略，选取其中一个Executor取执行任务，而脚本文件只在主节点上有，所以要进行修改。
   * 解决: 推荐使用指定特定的Executor取执行任务
     * 1. 在MySQL中azkaban数据库executors表中，查询应用所在节点上的Executor的id。
-    <img src="images/solve01.png" alt="solve01" style="zoom:60%;" />
+    <img src="assets/solve01.png" alt="solve01" style="zoom:60%;" />
     * 2. 在执行工作流程时加入useExecutor属性。
-    <img src="images/solve02.png" alt="solve02" style="zoom:50%;" />
+    <img src="assets/solve02.png" alt="solve02" style="zoom:50%;" />
     * 3. 启动执行
 
   * 方案二：在Executor所在所有节点部署任务所需脚本和应用。
